@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemples d'interactions avec des boutons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .button-container {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exemples d'interactions avec des boutons</h1>
+
+    <!-- Bouton 1 : Affiche du texte en dessous lorsqu'on clique -->
+    <div class="button-container">
+        <button id="button1">Cliquez pour afficher le texte</button>
+        <p id="text1" class="text" style="display: none;">Vous avez cliqué sur le bouton !</p>
+    </div>
+
+    <!-- Bouton 2 : Affiche ou cache le texte lorsqu'on clique -->
+    <div class="button-container">
+        <button id="button2">Cliquez pour afficher/masquer le texte</button>
+        <p id="text2" class="text" style="display: none;">Ce texte s'affiche et se cache !</p>
+    </div>
+
+    <!-- Bouton 3 : Affiche un texte et modifie le texte du bouton lorsqu'on clique -->
+    <div class="button-container">
+        <button id="button3">Cliquez pour changer le texte</button>
+        <p id="text3" class="text" style="display: none;">Ce texte apparaît, et le texte du bouton change !</p>
+    </div>
+
+    <script>
+        // Fonctionnalité du Bouton 1
+        document.getElementById('button1').addEventListener('click', function() {
+            const text1 = document.getElementById('text1');
+            text1.style.display = 'block';
+        });
+
+        // Fonctionnalité du Bouton 2
+        document.getElementById('button2').addEventListener('click', function() {
+            const text2 = document.getElementById('text2');
+            if (text2.style.display === 'none') {
+                text2.style.display = 'block';
+            } else {
+                text2.style.display = 'none';
+            }
+        });
+
+        // Fonctionnalité du Bouton 3
+        document.getElementById('button3').addEventListener('click', function() {
+            const text3 = document.getElementById('text3');
+            const button3 = document.getElementById('button3');
+            if (text3.style.display === 'none') {
+                text3.style.display = 'block';
+                button3.textContent = 'Vous avez cliqué !';
+            } else {
+                text3.style.display = 'none';
+                button3.textContent = 'Cliquez pour changer le texte';
+            }
+        });
+    </script>
+</body>
+</html>
