@@ -1,15 +1,19 @@
 // Sélectionner les éléments HTML pour afficher le profil et les dépôts
 const profileDiv = document.getElementById("profile");
 const reposDiv = document.getElementById("repos");
-const display = document.querySelector("#display")
+const display = document.querySelector("#display");
 
-
-
+// Jeton d'accès personnel (Remplacez par votre propre jeton sécurisé)
+const token = "votre_jeton_d_acces_personnel";
 
 // Fonction pour récupérer et afficher les données du profil GitHub
 async function fetchGitHubProfile(username) {
     try {
-        const response = await fetch(`https://api.github.com/users/${username}`);
+        const response = await fetch(`https://api.github.com/users/${username}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         if (!response.ok) {
             throw new Error(`GitHub user not found: ${response.statusText}`);
         }
@@ -30,13 +34,16 @@ async function fetchGitHubProfile(username) {
     } catch (error) {
         profileDiv.innerHTML = `<p>Error: ${error.message}</p>`;
     }
-
 }
 
 // Fonction pour récupérer et afficher les dépôts publics GitHub
 async function fetchGitHubRepos(username) {
     try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        const response = await fetch(`https://api.github.com/users/${username}/repos`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         if (!response.ok) {
             throw new Error(`GitHub repos not found: ${response.statusText}`);
         }
@@ -60,17 +67,14 @@ async function fetchGitHubRepos(username) {
     }
 }
 
-// Fonction pour afficher les dépots au clique
-
-display.addEventListener("click", async() => {
+// Fonction pour afficher les dépots au clic
+display.addEventListener("click", async () => {
     display.textContent = "Loading...";
     await fetchGitHubRepos(username);
-    // je veux faire disparait le bouton après avoir cliqué dessus
+    // Faire disparaître le bouton après avoir cliqué dessus
     display.style.display = "none";
 });
-
 
 // Appeler les fonctions avec votre nom d'utilisateur GitHub
 const username = "GuillaumePons63"; // Remplacez par votre nom d'utilisateur GitHub
 fetchGitHubProfile(username);
-
